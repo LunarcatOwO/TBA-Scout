@@ -8,6 +8,7 @@ RUN npm ci --only=production
 
 # Copy application code
 COPY src/ ./src/
+COPY public/ ./public/
 
 # Set environment variables
 ENV NODE_ENV=production
