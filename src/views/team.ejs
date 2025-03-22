@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Team <%= teamNumber %> at <%= eventKey %></h1>
+    
+    <div class="back">
+      <a href="/scout?eventKey=<%= eventKey %>">Back to Event</a>
+      <a href="/">Home</a>
+    </div>
+    
+    <% if (error) { %>
+      <div class="error">
+        <%= error %>
+      </div>
+    <% } %>
+    
+    <% if (teamData && teamData.length > 0) { %>
+      <!-- Team Summary Section -->
+      <div class="team-summary">
+        <h2>Performance Summary</h2>
+        <div class="summary-card">
+          <div class="summary-section">
+            <h3>Match Stats</h3>
+            <p>Matches Played: <%= teamSummary.matches %></p>
+          </div>
+          
+          <div class="summary-section">
+            <h3>Scoring Averages</h3>
+            <p>Auto Coral: <%= teamSummary.avgAutoCoral %> per match</p>
+            <p>Teleop Coral: <%= teamSummary.avgTeleopCoral %> per match</p>
+            <p>Algae in Processor: <%= teamSummary.avgAlgaeProcessor %> per match</p>
+            <p>Algae in Net: <%= teamSummary.avgAlgaeNet %> per match</p>
+            <p>Foul Points: <%= teamSummary.avgFoulPoints %> per match</p>
+          </div>
+          
+          <div class="summary-section">
+            <h3>Game Totals</h3>
+            <p>Total Auto Coral: <%= teamSummary.autoCoral %></p>
+            <p>Total Teleop Coral: <%= teamSummary.teleopCoral %></p>
+            <p>Total Algae in Processor: <%= teamSummary.algaeProcessor %></p>
+            <p>Total Algae in Net: <%= teamSummary.algaeNet %></p>
+            <p>Total Auto Leaves: <%= teamSummary.autoLeaves %></p>
+          </div>
+          
+          <div class="summary-section">
+            <h3>Endgame</h3>
+            <p>Climbs: <%= teamSummary.climbs %></p>
+            <p>- Deep Climbs: <%= teamSummary.deepClimbs %></p>
+            <p>- Shallow Climbs: <%= teamSummary.shallowClimbs %></p>
+            <p>Parks: <%= teamSummary.parks %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match Details Section -->
+      <h2>Match Details</h2>
+      <div class="matches">
+        <% teamData.forEach(match => { %>
+          <div class="match-card">
+            <h3>Match <%= match.match %> (<%= match.compLevel %>)</h3>
+            <p class="alliance <%= match.alliance.toLowerCase() %>-team">Alliance: <%= match.alliance %></p>
+            
+            <div class="match-details">
+              <h4>Scoring</h4>
+              <p>Auto Coral: <%= match.autoCoral || 0 %></p>
+              <p>Teleop Coral: <%= match.teleopCoral || 0 %></p>
+              <p>Algae in Processor: <%= match.algaeProcessor || 0 %></p>
+              <p>Algae in Net: <%= match.algaeNet || 0 %></p>
+              <p>Auto Leave: <%= match.autoLeave %></p>
+              <p>Foul Points: <%= match.foulPoints %></p>
+              
+              <h4>Endgame</h4>
+              <p>Status: <%= match.climbStatus %></p>
+              <p>Climb Depth: <%= match.climbDepth %></p>
+            </div>
+            
+            <div class="match-time">
+              <% if (match.actualTime) { %>
+                <p>Actual Time: <%= new Date(match.actualTime * 1000).toLocaleString() %></p>
+              <% } else if (match.predictedTime) { %>
+                <p>Predicted Time: <%= new Date(match.predictedTime * 1000).toLocaleString() %></p>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p>No matches found for Team <%= teamNumber %> at event <%= eventKey %>.</p>
+    <% } %>
+  </div>
+</body>
+</html>

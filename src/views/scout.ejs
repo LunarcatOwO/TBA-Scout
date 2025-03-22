@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>TBA Scout - Event Data</h1>
+    
+    <div class="search-form">
+      <form action="/scout" method="GET">
+        <input type="text" name="eventKey" value="<%= eventKey %>" placeholder="Enter Event Key (e.g., 2025onnob)" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    
+    <% if (error) { %>
+      <div class="error">
+        <%= error %>
+      </div>
+    <% } %>
+    
+    <% if (matchData && matchData.length > 0) { %>
+      <h2>Matches for Event: <%= eventKey %></h2>
+      <div class="matches">
+        <% matchData.forEach(match => { %>
+          <div class="match-card">
+            <h3>Match <%= match.match_number %> (<%= match.comp_level %>)</h3>
+            <% if (match.alliances && match.alliances.blue && match.alliances.red) { %>
+              <div class="alliances">
+                <div class="blue">
+                  <h4>Blue Alliance</h4>
+                  <p>Teams: 
+                    <% match.alliances.blue.team_keys.forEach(team => { %>
+                      <a href="/team?eventKey=<%= eventKey %>&teamKey=<%= team %>"><%= team.replace('frc', '') %></a>
+                    <% }); %>
+                  </p>
+                  <p>Score: <%= match.alliances.blue.score !== null ? match.alliances.blue.score : 'Not played' %></p>
+                </div>
+                <div class="red">
+                  <h4>Red Alliance</h4>
+                  <p>Teams:
+                    <% match.alliances.red.team_keys.forEach(team => { %>
+                      <a href="/team?eventKey=<%= eventKey %>&teamKey=<%= team %>"><%= team.replace('frc', '') %></a>
+                    <% }); %>
+                  </p>
+                  <p>Score: <%= match.alliances.red.score !== null ? match.alliances.red.score : 'Not played' %></p>
+                </div>
+              </div>
+            <% } %>
+            <div class="match-time">
+              <% if (match.actual_time) { %>
+                <p>Actual Time: <%= new Date(match.actual_time * 1000).toLocaleString() %></p>
+              <% } else if (match.predicted_time) { %>
+                <p>Predicted Time: <%= new Date(match.predicted_time * 1000).toLocaleString() %></p>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else if (eventKey) { %>
+      <p>No matches found for this event.</p>
+    <% } %>
+    
+    <div class="back">
+      <a href="/">Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

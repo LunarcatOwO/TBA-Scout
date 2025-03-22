@@ -1,0 +1,201 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+h2 {
+  margin: 20px 0;
+  color: #3498db;
+}
+
+.search-form {
+  margin: 30px 0;
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.match-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: transform 0.3s;
+}
+
+.match-card:hover {
+  transform: translateY(-5px);
+}
+
+.alliances {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.blue, .red {
+  width: 48%;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.blue {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.red {
+  background-color: rgba(231, 76, 60, 0.2);
+}
+
+.match-time {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #7f8c8d;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.info {
+  background-color: #e8f4f8;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.info h2 {
+  margin-top: 0;
+}
+
+.info ol {
+  margin-left: 20px;
+}
+
+.back {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.back a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.back a:hover {
+  text-decoration: underline;
+}
+
+/* Team page styles */
+.team-summary {
+  margin: 30px 0;
+}
+
+.summary-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.summary-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.summary-section h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.match-details {
+  margin: 15px 0;
+}
+
+.match-details h4 {
+  color: #3498db;
+  margin: 10px 0 5px 0;
+}
+
+.blue-team {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.red-team {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.back {
+  margin: 20px 0;
+}
+
+.back a {
+  color: #3498db;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.back a:hover {
+  text-decoration: underline;
+}
