@@ -57,6 +57,8 @@ const fetchEventData = async (eventKey, teamKey, apiKey) => {
         alliance: allianceColor,
         teams: allianceTeams,
         score: match.alliances?.[alliance]?.score,
+        // Add opposing alliance score
+        opposingScore: match.alliances?.[alliance === 'blue' ? 'red' : 'blue']?.score,
         
         // 2025 Ocean Opportunities field names - from the console output
         autoCoral: getFieldValue(breakdown, [

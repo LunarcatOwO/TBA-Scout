@@ -84,6 +84,9 @@ app.get("/team", async (req, res) => {
     parks: 0,
     deepClimbs: 0,
     shallowClimbs: 0,
+    wins: 0,
+    losses: 0,
+    ties: 0
   };
   let error = null;
 
@@ -112,6 +115,17 @@ app.get("/team", async (req, res) => {
         } else if (matchData.climbStatus === "Park") {
           teamSummary.parks++;
         }
+
+        // Track wins/losses/ties (only if scores are available)
+        if (matchData.score !== null && matchData.opposingScore !== null) {
+          if (matchData.score > matchData.opposingScore) {
+            teamSummary.wins++;
+          } else if (matchData.score < matchData.opposingScore) {
+            teamSummary.losses++;
+          } else {
+            teamSummary.ties++;
+          }
+        }
       });
     } catch (err) {
       console.error(err);
@@ -125,6 +139,10 @@ app.get("/team", async (req, res) => {
     teamSummary.avgAlgaeProcessor = (teamSummary.algaeProcessor / teamSummary.matches).toFixed(2);
     teamSummary.avgAlgaeNet = (teamSummary.algaeNet / teamSummary.matches).toFixed(2);
     teamSummary.avgFoulPoints = (teamSummary.foulPoints / teamSummary.matches).toFixed(2);
+    // Calculate win/loss ratio
+    const totalDecisions = teamSummary.wins + teamSummary.losses;
+    teamSummary.winLossRatio = totalDecisions > 0 ? 
+      (teamSummary.wins / totalDecisions).toFixed(2) : '0.00';
   }
 
   res.render('team', {
