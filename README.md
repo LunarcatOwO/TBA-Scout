@@ -1,3 +1,6 @@
+# Deprecated! Checkout [MelodyDevelopment/nexus-matches-fetcher](https://github.com/MelodyDevelopment/nexus-matches-fetcher) instead!
+
+
 Collecting workspace information# TBA Scout
 
 A simple web application to view FRC (FIRST Robotics Competition) match data from The Blue Alliance API. This tool helps teams scout and analyze performance data during FRC events.
